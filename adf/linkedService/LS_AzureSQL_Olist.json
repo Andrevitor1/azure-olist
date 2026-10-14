@@ -1,0 +1,15 @@
+{
+	"name": "LS_AzureSQL_Olist",
+	"properties": {
+		"description": "Connection between ADF and the Olist Azure SQL database",
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "data-olistcentral.database.windows.net",
+			"database": "free-sql-db-6849147",
+			"encrypt": "mandatory",
+			"trustServerCertificate": false,
+			"authenticationType": "SystemAssignedManagedIdentity"
+		}
+	}
+}
