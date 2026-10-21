@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable1",
+	"name": "DS_SQL_Stg_Customers",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LS_AzureSQL_Olist",
