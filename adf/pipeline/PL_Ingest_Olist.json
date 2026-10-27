@@ -1,0 +1,17 @@
+{
+	"name": "PL_Ingest_Olist",
+	"properties": {
+		"description": "Parameterized ingestion pipeline responsible for loading Olist CSV files from Azure Data Lake Storage Gen2 into Azure SQL staging tables, using reusable datasets and configurable source and destination parameters.",
+		"parameters": {
+			"pFileName": {
+				"type": "string",
+				"defaultValue": "olist_customers_dataset.csv"
+			},
+			"pTableName": {
+				"type": "string",
+				"defaultValue": "stg_customers"
+			}
+		},
+		"annotations": []
+	}
+}
