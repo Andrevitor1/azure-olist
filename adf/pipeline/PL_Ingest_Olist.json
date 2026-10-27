@@ -2,6 +2,99 @@
 	"name": "PL_Ingest_Olist",
 	"properties": {
 		"description": "Parameterized ingestion pipeline responsible for loading Olist CSV files from Azure Data Lake Storage Gen2 into Azure SQL staging tables, using reusable datasets and configurable source and destination parameters.",
+		"activities": [
+			{
+				"name": "Clear_Staging",
+				"type": "Script",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"linkedServiceName": {
+					"referenceName": "LS_AzureSQL_Olist",
+					"type": "LinkedServiceReference"
+				},
+				"typeProperties": {
+					"scripts": [
+						{
+							"type": "Query",
+							"text": "DELETE FROM dbo.stg_customers;"
+						}
+					],
+					"scriptBlockExecutionTimeout": "02:00:00"
+				}
+			},
+			{
+				"name": "Olist_Customers",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Clear_Staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "DS_ADLS_Olist_Customers",
+						"type": "DatasetReference",
+						"parameters": {
+							"pFileName": "@pipeline().parameters.pFileName"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DS_SQL_Stg_Customers",
+						"type": "DatasetReference",
+						"parameters": {
+							"pTableName": "@pipeline().parameters.pTableName"
+						}
+					}
+				]
+			}
+		],
 		"parameters": {
 			"pFileName": {
 				"type": "string",

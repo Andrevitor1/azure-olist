@@ -5,6 +5,12 @@
 			"referenceName": "LS_AzureSQL_Olist",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"pTableName": {
+				"type": "string",
+				"defaultValue": "stg_customers"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [
@@ -31,7 +37,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "stg_customers"
+			"table": "@dataset().pTableName"
 		}
 	}
 }
