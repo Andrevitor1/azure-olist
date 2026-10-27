@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "PL_Load_Olist_Order_Items",
 	"properties": {
 		"activities": [
 			{
