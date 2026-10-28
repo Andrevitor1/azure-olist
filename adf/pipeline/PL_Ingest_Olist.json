@@ -23,14 +23,14 @@
 					"scripts": [
 						{
 							"type": "Query",
-							"text": "DELETE FROM dbo.stg_customers;"
+							"text": "@concat('DELETE FROM dbo.', pipeline().parameters.pTableName, ';')"
 						}
 					],
 					"scriptBlockExecutionTimeout": "02:00:00"
 				}
 			},
 			{
-				"name": "Olist_Customers",
+				"name": "Copy_Olist_Data",
 				"type": "Copy",
 				"dependsOn": [
 					{
