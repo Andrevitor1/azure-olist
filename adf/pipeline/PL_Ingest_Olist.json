@@ -54,6 +54,11 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"value": "$$FILEPATH"
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
@@ -71,92 +76,6 @@
 					"enableStaging": false,
 					"translator": {
 						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "review_id",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_id",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "order_id",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "order_id",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "review_score",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_score",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "review_comment_title",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_comment_title",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "review_comment_message",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_comment_message",
-									"type": "String",
-									"physicalType": "nvarchar"
-								}
-							},
-							{
-								"source": {
-									"name": "review_creation_date",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_creation_date",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								}
-							},
-							{
-								"source": {
-									"name": "review_answer_timestamp",
-									"type": "String",
-									"physicalType": "String"
-								},
-								"sink": {
-									"name": "review_answer_timestamp",
-									"type": "DateTime",
-									"physicalType": "datetime2"
-								}
-							}
-						],
 						"typeConversion": true,
 						"typeConversionSettings": {
 							"allowDataTruncation": true,
