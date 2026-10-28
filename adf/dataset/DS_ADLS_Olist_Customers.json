@@ -8,7 +8,7 @@
 		"parameters": {
 			"pFileName": {
 				"type": "string",
-				"defaultValue": "\tolist_customers_dataset.csv"
+				"defaultValue": "olist_customers_dataset.csv"
 			}
 		},
 		"annotations": [],
@@ -16,11 +16,14 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "@dataset().pFileName",
+				"fileName": {
+					"value": "@dataset().pFileName",
+					"type": "Expression"
+				},
 				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",
-			"escapeChar": "\\",
+			"escapeChar": "\"",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
